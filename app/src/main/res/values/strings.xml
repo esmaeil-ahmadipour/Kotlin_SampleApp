@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Kotlin_SampleApp</string>
+    <!-- Activity Main -->
+    <string name="txt_title">Hello World !</string>
+    <string name="btn_title">Button</string>
+    <!-- Toast -->
+    <string name="toast_test_message">This Is A Test.</string>
+
+
 </resources>
