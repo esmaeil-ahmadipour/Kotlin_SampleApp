@@ -1,19 +1,28 @@
 package ir.ea2.kotlin_sampleapp
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import ir.ea2.kotlin_sampleapp.util.toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     var context: Context = this
+    private val phoneNumber: String = "+989163902136"
+
     companion object {
         // Final Variable Used As Key For Intent.putExtra.
         const val INPUT_VALUE = "INPUT"
+        //Permission  requestCode callPhone   REQUEST_CODE_CALL_PHONE
+        const val REQUEST_CODE_CALL_PHONE: Int = 100
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +41,39 @@ class MainActivity : AppCompatActivity() {
             ac_main_txt.text = "Hello Beautiful World :)"
             startSecondActivity()
         }
+
+        //Call & PermissionCheck
+        ac_main_btn_call.setOnClickListener {
+            if (checkCallPhonePermission()) {
+                intentCallPhone()
+            } else {
+                callPhonePermission()
+            }
+        }
     }
+    //After Send Any requestPermissions Run This Method For Check Results.
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray) {
+        when (requestCode) {
+            REQUEST_CODE_CALL_PHONE -> {
+                if (grantResults.isNotEmpty()) {
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        // CallPhone is Allow
+                        intentCallPhone()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun intentCallPhone() {
+        val intentCall = Intent(Intent.ACTION_CALL)
+        intentCall.data = Uri.parse("tel:$phoneNumber")
+        startActivity(intentCall)
+    }
+
     //Inflate Layer PopupMenu :
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
@@ -52,6 +93,15 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
+
+    //Get Permission From User'sOfApplication:
+    private fun callPhonePermission() =
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), REQUEST_CODE_CALL_PHONE)
+
+    //Check Permission Accepted by User'sOfApplication Or Rejected:
+    private fun checkCallPhonePermission(): Boolean =
+        ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED
+
     private fun startSecondActivity() {
         val intent = Intent(this, SecondActivity::class.java)
         intent.putExtra(INPUT_VALUE, ac_main_edt.text.toString())
