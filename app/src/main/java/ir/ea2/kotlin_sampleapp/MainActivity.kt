@@ -7,7 +7,10 @@ import ir.ea2.kotlin_sampleapp.util.toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
+companion object{
+    // Final Variable Used As Key For Intent.putExtra.
+     const val INPUT_VALUE="INPUT"
+}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun startSecondActivity() {
         val intent = Intent(this, SecondActivity::class.java)
+        intent.putExtra(INPUT_VALUE,ac_main_edt.text.toString())
         startActivity(intent)
     }
 }

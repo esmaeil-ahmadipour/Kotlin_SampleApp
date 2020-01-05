@@ -11,7 +11,8 @@ class SecondActivity : AppCompatActivity() {
         setContentView(R.layout.activity_second)
         txtView = findViewById(R.id.ac_second_txt)
         // this "!!" for Confirm (isn't NullObject)
+        txtView!!.text = (this.title)
         // If This Object Get Null Value , Then You Must change "!!" to "?"
-        txtView!!.text=(this.title)
+        txtView?.text = intent.getStringExtra(MainActivity.INPUT_VALUE)
     }
 }
