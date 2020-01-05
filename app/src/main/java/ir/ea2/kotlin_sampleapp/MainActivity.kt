@@ -1,5 +1,6 @@
 package ir.ea2.kotlin_sampleapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import ir.ea2.kotlin_sampleapp.util.toast
@@ -12,11 +13,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         // Goodbye findViewById ! We Now Bind View Object On RunTime! (by Using plugin: 'kotlin-android-extensions' in header of file build.gradle)
         ac_main_btn.setOnClickListener {
-
             //Using ContextExtensions From Package util .
             this.toast(resources.getString(R.string.toast_test_message))
-
             ac_main_txt.text = "Hello Beautiful World :)"
+            startSecondActivity()
         }
+
+    }
+
+    private fun startSecondActivity() {
+        val intent = Intent(this, SecondActivity::class.java)
+        startActivity(intent)
     }
 }
