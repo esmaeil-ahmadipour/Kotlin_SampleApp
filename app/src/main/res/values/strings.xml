@@ -5,6 +5,12 @@
     <string name="btn_title">Button</string>
     <!-- Toast -->
     <string name="toast_test_message">This Is A Test.</string>
+    <!-- PopUp Menu -->
+    <string name="menu_item1_title">Item One</string>
+    <string name="menu_item2_title">Item Two</string>
+    <string name="menu_item3_title">Item Three</string>
+    <string name="menu_item4_title">Item Four</string>
+    <string name="menu_icon1_title">Search</string>
 
 
 </resources>
