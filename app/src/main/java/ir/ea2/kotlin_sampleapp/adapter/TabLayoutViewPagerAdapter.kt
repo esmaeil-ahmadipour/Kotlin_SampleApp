@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import ir.ea2.kotlin_sampleapp.UserListFragment
 
 class TabLayoutViewPagerAdapter(fragmentManager: FragmentManager) :FragmentPagerAdapter(fragmentManager){
-    private val tabTitles= arrayOf("Teen","Old")
+    private val tabTitles= arrayOf("Man","Woman")
     override fun getItem(position: Int): Fragment =UserListFragment.newInstance()
 
     override fun getCount(): Int = tabTitles.size
