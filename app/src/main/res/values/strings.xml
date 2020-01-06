@@ -1,8 +1,4 @@
 <resources>
     <string name="app_name">Kotlin_SampleApp</string>
-    <!-- Activity Main -->
-    <string name="txt_title">Hello World !</string>
-    <string name="btn_title1">Start</string>
-    <string name="btn_title2">Reset</string>
 
 </resources>
