@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ir.ea2.kotlin_sampleapp.R
+import ir.ea2.kotlin_sampleapp.UserListFragment
 import ir.ea2.kotlin_sampleapp.model.User
 import kotlinx.android.synthetic.main.user_item_layout.view.*
 
@@ -31,5 +32,9 @@ class RecyclerViewAdapter(var userList:List<User> ):RecyclerView.Adapter<Recycle
 
         Glide.with(holder.itemView).load(userList[position].image).into(holder.itemView.layout_user_img_user)
 
+    }
+    fun updateItems(){
+        userList=UserListFragment.list
+        notifyDataSetChanged()
     }
 }
